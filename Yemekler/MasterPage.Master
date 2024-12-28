@@ -1,0 +1,177 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Yemekler.MasterPage" %>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Annemin Mutfağı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <div class="main-menu">
+        <ul>
+            <li><a href="Main.aspx">Ana Sayfa</a></li>
+            <li><a href="Login.aspx">Giriş Yap</a></li>
+            <li><a href="Account.aspx">Hesabım</a></li>
+        </ul>
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf5e6;
+        }
+
+        .header {
+            background-color: #f8c291;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Pacifico', cursive;
+            color: #e74c3c;
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .search-bar input[type="text"] {
+            width: 400px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+
+        .search-bar-btn {
+            background-color: #f76c6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar-btn :hover {
+            background-color: #e94e4e;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 30px;
+        }
+
+        .category-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: scale(1.1);
+        }
+
+        .category-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-item p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .category-item a {
+            text-decoration: none;
+        }
+
+        .main-menu {
+            background-color: #f8c291;
+            padding: 10px 0;
+        }
+
+        .main-menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-menu li {
+            margin: 0 15px;
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .main-menu a:hover {
+            color: #e74c3c;
+        }
+        .ingredient-search-btn {
+            background-color: #f76c6c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .ingredient-search-btn:hover {
+            background-color: #e94e4e;
+        }
+
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="header">
+            <h1>Annemin Mutfağı</h1>
+        </div>
+
+        <!-- Kategoriler -->
+        <div class="categories">
+            <asp:Repeater ID="rptCategories" runat="server">
+                <ItemTemplate>
+                    <div class="category-item">
+                        <a href="Category.aspx?category=<%# Eval("Name") %>">
+                            <img src='<%# Eval("ImageUrl") %>' alt='<%# Eval("Name") %>' />
+                            <p><%# Eval("Name") %></p>
+                        </a>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+        <div class="search-bar">
+            <asp:TextBox ID="txtArama" runat="server" CssClass="arama-kutusu" Placeholder="Yemek ara..."></asp:TextBox>
+            <asp:Button ID="btnAra" runat="server" Text="Ara" CssClass="search-bar-btn" OnClick="btnAra_Click" />
+            <span>veya</span>
+            <asp:Button ID="btnIngredientSearch" runat="server" Text="Malzemelere Göre Arayın" CssClass="ingredient-search-btn" OnClick="btnIngredientSearch_Click" />
+        </div>
+
+
+        <!-- İçerik -->
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

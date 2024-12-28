@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Monster\\source\\repos\\Yemekler\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|C:\\Users\\Monster\\source\\repos\\Yemekler\\yemekler\\main.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\main.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|c:\\users\\monster\\source\\repos\\yemekler\\yemekler\\register.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\register.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|C:\\Users\\Monster\\source\\repos\\Yemekler\\yemekler\\register.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\register.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|C:\\Users\\Monster\\source\\repos\\Yemekler\\yemekler\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\login.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|C:\\Users\\Monster\\source\\repos\\Yemekler\\yemekler\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|C:\\Users\\Monster\\source\\repos\\Yemekler\\yemekler\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\login.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|c:\\users\\monster\\source\\repos\\yemekler\\yemekler\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|c:\\users\\monster\\source\\repos\\yemekler\\yemekler\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{933C4D4F-A826-4FD1-A8D4-2FC06038E586}|Yemekler\\Yemekler.csproj|solutionrelative:yemekler\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WebApiConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\App_Start\\WebApiConfig.cs",
+              "RelativeDocumentMoniker": "Yemekler\\App_Start\\WebApiConfig.cs",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\App_Start\\WebApiConfig.cs",
+              "RelativeToolTip": "Yemekler\\App_Start\\WebApiConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T13:49:19.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "Yemekler\\App_Start\\RouteConfig.cs",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "Yemekler\\App_Start\\RouteConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T13:49:05.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.aspx",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Main.aspx",
+              "RelativeDocumentMoniker": "Yemekler\\Main.aspx",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Main.aspx",
+              "RelativeToolTip": "Yemekler\\Main.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-12-27T22:28:45.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\UsersController.cs",
+              "RelativeDocumentMoniker": "Yemekler\\UsersController.cs",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\UsersController.cs",
+              "RelativeToolTip": "Yemekler\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T15:40:02.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Login.aspx",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Login.aspx",
+              "RelativeDocumentMoniker": "Yemekler\\Login.aspx",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Login.aspx",
+              "RelativeToolTip": "Yemekler\\Login.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-12-23T23:27:25.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Login.aspx.cs",
+              "RelativeDocumentMoniker": "Yemekler\\Login.aspx.cs",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Login.aspx.cs",
+              "RelativeToolTip": "Yemekler\\Login.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T23:27:28.223Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Register.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Register.aspx.cs",
+              "RelativeDocumentMoniker": "Yemekler\\Register.aspx.cs",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Register.aspx.cs",
+              "RelativeToolTip": "Yemekler\\Register.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T23:41:44.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Register.aspx",
+              "DocumentMoniker": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Register.aspx",
+              "RelativeDocumentMoniker": "Yemekler\\Register.aspx",
+              "ToolTip": "C:\\Users\\Monster\\source\\repos\\Yemekler\\Yemekler\\Register.aspx",
+              "RelativeToolTip": "Yemekler\\Register.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-12-23T23:42:01.363Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
