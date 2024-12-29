@@ -1,51 +1,60 @@
 ﻿using System;
-using System.Net.Http;
-using System.Text;
+using System.Configuration;
+using MySql.Data.MySqlClient;
 using System.Web.UI;
-using Newtonsoft.Json;
 
 namespace Yemekler
 {
     public partial class Register : System.Web.UI.Page
     {
-        protected async void btnRegister_Click(object sender, EventArgs e)
+        protected void btnRegister_Click(object sender, EventArgs e)
         {
-            PageAsyncTask task = new PageAsyncTask(async ct =>
+            string username = txtUsername.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                string username = txtUsername.Text.Trim();
-                string email = txtEmail.Text.Trim();
-                string password = txtPassword.Text.Trim();
+                lblMessage.Text = "Lütfen tüm alanları doldurunuz.";
+                lblMessage.Visible = true;
+                return;
+            }
 
-                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            // Veritabanı bağlantısı
+            string connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
                 {
-                    lblMessage.Text = "Lütfen tüm alanları doldurunuz.";
-                    lblMessage.Visible = true;
-                    return;
-                }
+                    connection.Open();
 
-
-
-                using (HttpClient client = new HttpClient())
-                {
-                    try
+                    // Kullanıcı adı veya e-posta kontrolü
+                    string checkQuery = "SELECT COUNT(*) FROM Users WHERE Username = @Username OR Email = @Email";
+                    using (MySqlCommand checkCommand = new MySqlCommand(checkQuery, connection))
                     {
-                        string apiUrl = "http://localhost:44393/api/users/register";
+                        checkCommand.Parameters.AddWithValue("@Username", username);
+                        checkCommand.Parameters.AddWithValue("@Email", email);
 
-                        // Yeni kullanıcı verilerini JSON formatında hazırlıyoruz
-                        var newUser = new
+                        int count = Convert.ToInt32(checkCommand.ExecuteScalar());
+                        if (count > 0)
                         {
-                            Username = username,
-                            Email = email,
-                            Password = password
-                        };
+                            lblMessage.Text = "Bu kullanıcı adı veya e-posta zaten kayıtlı.";
+                            lblMessage.Visible = true;
+                            return;
+                        }
+                    }
 
-                        string json = JsonConvert.SerializeObject(newUser);
-                        var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    // Yeni kullanıcı kaydı
+                    string insertQuery = "INSERT INTO Users (Username, Password, Email, CreatedAt) VALUES (@Username, @Password, @Email, NOW())";
+                    using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@Username", username);
+                        insertCommand.Parameters.AddWithValue("@Password", password);
+                        insertCommand.Parameters.AddWithValue("@Email", email);
 
-                        // API'ye POST isteği gönderiyoruz
-                        HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-
-                        if (response.IsSuccessStatusCode)
+                        int result = insertCommand.ExecuteNonQuery();
+                        if (result > 0)
                         {
                             lblMessage.Text = "Kayıt başarılı. Giriş yapabilirsiniz.";
                             lblMessage.Visible = true;
@@ -55,27 +64,17 @@ namespace Yemekler
                         }
                         else
                         {
-                            string errorContent = await response.Content.ReadAsStringAsync();
-                            lblMessage.Text = $"Kayıt başarısız: {errorContent}";
+                            lblMessage.Text = "Kayıt başarısız oldu. Lütfen tekrar deneyin.";
                             lblMessage.Visible = true;
                         }
                     }
-                    catch (HttpRequestException httpEx)
-                    {
-                        lblMessage.Text = $"API isteği başarısız oldu: {httpEx.Message}";
-                        lblMessage.Visible = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        lblMessage.Text = $"Bir hata oluştu: {ex.Message}";
-                        lblMessage.Visible = true;
-                    }
                 }
-            });
-
-            // Asenkron işlemi başlatıyoruz
-            Page.RegisterAsyncTask(task);
-            Page.ExecuteRegisteredAsyncTasks();
+                catch (Exception ex)
+                {
+                    lblMessage.Text = $"Bir hata oluştu: {ex.Message}";
+                    lblMessage.Visible = true;
+                }
+            }
         }
     }
 }

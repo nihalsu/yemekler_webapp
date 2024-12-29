@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.UI;
 using MySql.Data.MySqlClient;
 
 namespace Yemekler
@@ -35,21 +31,15 @@ namespace Yemekler
                     {
                         if (reader.Read())
                         {
-                            // Yemek adı
                             ltlYemekAdi.Text = reader["YemekAdi"].ToString();
+                            recipeImage.Src = reader["ResimUrl"].ToString();
 
-                            // Yemek resmi
-                            string imageUrl = reader["ResimUrl"].ToString();
-                            ViewState["ResimUrl"] = imageUrl; // Resmi ViewState ile saklıyoruz
-
-                            // Malzemeler
                             string malzemeler = reader["Malzemeler"].ToString();
                             string[] malzemeListesi = malzemeler.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                             rptMalzemeler.DataSource = malzemeListesi;
                             rptMalzemeler.DataBind();
 
-                            // Tarif metni
                             ltlTarif.Text = reader["TarifMetni"].ToString();
                         }
                     }
@@ -57,19 +47,6 @@ namespace Yemekler
             }
         }
 
-
-
-        protected override void Render(System.Web.UI.HtmlTextWriter writer)
-        {
-            base.Render(writer);
-
-            // Yemek resmi için img tag'i dinamik olarak güncelleniyor
-            string resimUrl = ViewState["ResimUrl"]?.ToString();
-            if (!string.IsNullOrEmpty(resimUrl))
-            {
-                writer.Write($"<script>document.querySelector('.recipe-image img').src = '{resimUrl}';</script>");
-            }
-        }
         protected void btnSaveRecipe_Click(object sender, EventArgs e)
         {
             if (Session["UserId"] == null)
@@ -78,48 +55,46 @@ namespace Yemekler
                 return;
             }
 
-            // Zaman uyumsuz işlemi PageAsyncTask ile sar
-            PageAsyncTask task = new PageAsyncTask(async ct =>
+            int userId = Convert.ToInt32(Session["UserId"]);
+            int recipeId = Convert.ToInt32(Request.QueryString["Id"]);
+            string recipeName = ltlYemekAdi.Text;
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
-                int recipeId = Convert.ToInt32(Request.QueryString["Id"]);
-                string recipeName = ltlYemekAdi.Text;
-
-                using (HttpClient client = new HttpClient())
+                try
                 {
-                    try
+                    conn.Open();
+
+                    string checkQuery = "SELECT COUNT(*) FROM SavedRecipes WHERE UserId = @UserId AND RecipeId = @RecipeId";
+                    using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, conn))
                     {
-                        var postData = new FormUrlEncodedContent(new[]
-                        {
-                    new KeyValuePair<string, string>("recipeId", recipeId.ToString()),
-                    new KeyValuePair<string, string>("recipeName", recipeName)
-                });
+                        checkCmd.Parameters.AddWithValue("@UserId", userId);
+                        checkCmd.Parameters.AddWithValue("@RecipeId", recipeId);
 
-                        string apiUrl = "http://localhost:44393/UsersAPI.ashx?action=saverecipe";
-                        HttpResponseMessage response = await client.PostAsync(apiUrl, postData);
-
-                        if (response.IsSuccessStatusCode)
+                        int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                        if (count > 0)
                         {
-                            lblMessage.Text = "Tarif başarıyla kaydedildi!";
-                        }
-                        else
-                        {
-                            lblMessage.Text = "Tarif kaydedilirken bir hata oluştu.";
+                            lblMessage.Text = "Bu tarif zaten kaydedilmiş.";
+                            return;
                         }
                     }
-                    catch (Exception ex)
+
+                    string insertQuery = "INSERT INTO SavedRecipes (UserId, RecipeId, RecipeName) VALUES (@UserId, @RecipeId, @RecipeName)";
+                    using (MySqlCommand cmd = new MySqlCommand(insertQuery, conn))
                     {
-                        lblMessage.Text = $"Bir hata oluştu: {ex.Message}";
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        cmd.Parameters.AddWithValue("@RecipeId", recipeId);
+                        cmd.Parameters.AddWithValue("@RecipeName", recipeName);
+
+                        cmd.ExecuteNonQuery();
+                        lblMessage.Text = "Tarif başarıyla kaydedildi!";
                     }
                 }
-            });
-
-            // Zaman uyumsuz işlemi sayfada kaydet ve çalıştır
-            Page.RegisterAsyncTask(task);
-            Page.ExecuteRegisteredAsyncTasks();
+                catch (Exception ex)
+                {
+                    lblMessage.Text = $"Bir hata oluştu: {ex.Message}";
+                }
+            }
         }
-
-
-
-
     }
 }

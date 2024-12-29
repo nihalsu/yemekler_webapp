@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Net.Http;
-using System.Text;
+using System.Configuration;
+using MySql.Data.MySqlClient;
 using System.Web.UI;
-using Newtonsoft.Json;
 
 namespace Yemekler
 {
@@ -10,72 +9,61 @@ namespace Yemekler
     {
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            PageAsyncTask task = new PageAsyncTask(async ct =>
+            string email = txtEmail.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                string email = txtEmail.Text.Trim();
-                string password = txtPassword.Text.Trim();
+                lblMessage.Text = "Lütfen email ve şifre alanlarını doldurunuz.";
+                lblMessage.Visible = true;
+                return;
+            }
 
-                if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            // Veritabanı bağlantısı
+            string connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
                 {
-                    lblMessage.Text = "Lütfen email ve şifre alanlarını doldurunuz.";
+                    connection.Open();
+
+                    // Kullanıcı kontrolü
+                    string query = "SELECT Id, Username FROM Users WHERE Email = @Email AND Password = @Password";
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Email", email);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Kullanıcı bulundu, session bilgileri kaydediliyor
+                                Session["UserId"] = reader["Id"].ToString();
+                                Session["Username"] = reader["Username"].ToString();
+
+                                lblMessage.Text = "Giriş başarılı, yönlendiriliyorsunuz.";
+                                lblMessage.Visible = true;
+
+                                // Account sayfasına yönlendirme
+                                Response.Redirect("Account.aspx", false);
+                            }
+                            else
+                            {
+                                // Kullanıcı bulunamadı
+                                lblMessage.Text = "Email veya şifre yanlış. Lütfen tekrar deneyin.";
+                                lblMessage.Visible = true;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblMessage.Text = $"Bir hata oluştu: {ex.Message}";
                     lblMessage.Visible = true;
-                    return;
                 }
-
-                using (HttpClient client = new HttpClient())
-                {
-                    try
-                    {
-                        string apiUrl = "http://localhost:44393/api/users/login";
-
-                        // Kullanıcı giriş verilerini JSON formatında hazırlıyoruz
-                        var loginData = new
-                        {
-                            Email = email,
-                            Password = password
-                        };
-
-                        string jsonContent = JsonConvert.SerializeObject(loginData);
-                        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                        // API'ye POST isteği gönderiyoruz
-                        HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            string jsonResponse = await response.Content.ReadAsStringAsync();
-                            dynamic result = JsonConvert.DeserializeObject(jsonResponse);
-
-                            // Kullanıcı bilgilerini session'a kaydediyoruz
-                            Session["UserId"] = result.UserId;
-                            Session["Username"] = result.Username;
-
-                            lblMessage.Text = "Giriş başarılı, yönlendiriliyorsunuz.";
-                            lblMessage.Visible = true;
-
-                            // Başarılı girişten sonra yönlendirme
-                            Response.Redirect("Account.aspx", false);
-                        }
-                        else
-                        {
-                            string errorContent = await response.Content.ReadAsStringAsync();
-                            lblMessage.Text = $"Giriş başarısız: {errorContent}";
-                            lblMessage.Visible = true;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-
-                        string errorDetails = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                        lblMessage.Text = $"Bir hata oluştu: {errorDetails}";
-                        lblMessage.Visible = true;
-                    }
-                }
-            });
-
-            // Asenkron işlemi başlatıyoruz
-            Page.RegisterAsyncTask(task);
-            Page.ExecuteRegisteredAsyncTasks();
+            }
         }
     }
 }

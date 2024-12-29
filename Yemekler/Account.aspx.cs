@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 
 namespace Yemekler
@@ -14,6 +15,7 @@ namespace Yemekler
             }
             else if (!IsPostBack)
             {
+                lblUserName.Text = Session["Username"].ToString(); // Kullanıcı adını göster
                 LoadSavedRecipes();
             }
         }
@@ -26,7 +28,7 @@ namespace Yemekler
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
-                string query = "SELECT RecipeName FROM SavedRecipes WHERE UserId = @UserId";
+                string query = "SELECT RecipeId, RecipeName FROM SavedRecipes WHERE UserId = @UserId";
 
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
@@ -44,41 +46,26 @@ namespace Yemekler
                         else
                         {
                             lblMessage.Text = "Henüz tarif kaydedilmemiş.";
+                            lblMessage.Visible = true;
                         }
                     }
                 }
             }
         }
+        
 
-        protected void btnAddRecipe_Click(object sender, EventArgs e)
+        protected void rptSavedRecipes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int userId = Convert.ToInt32(Session["UserId"]);
-            string recipeName = txtRecipeName.Text.Trim();
-
-            if (!string.IsNullOrEmpty(recipeName))
+            if (e.CommandName == "ViewDetails")
             {
-                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MySqlDbContext"].ConnectionString;
+                // Seçilen satırın index'ini alıyoruz
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                using (MySqlConnection conn = new MySqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string query = "INSERT INTO SavedRecipes (UserId, RecipeName) VALUES (@UserId, @RecipeName)";
+                // GridView'deki DataKey'den RecipeId'yi alıyoruz
+                int recipeId = Convert.ToInt32(rptSavedRecipes.DataKeys[rowIndex].Value);
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@UserId", userId);
-                        cmd.Parameters.AddWithValue("@RecipeName", recipeName);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                LoadSavedRecipes();
-                lblMessage.Text = "Tarif başarıyla kaydedildi.";
-            }
-            else
-            {
-                lblMessage.Text = "Lütfen tarif adını girin.";
+                // Detay sayfasına yönlendiriyoruz
+                Response.Redirect($"Detay.aspx?Id={recipeId}");
             }
         }
     }

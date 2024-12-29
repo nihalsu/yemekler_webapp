@@ -36,6 +36,13 @@
             gap: 30px;
             margin-bottom: 30px;
         }
+        .recipe-image img {
+            width: 100%;
+            height: 100%; /* Çerçeveye tam oturmasını sağlar */
+            object-fit: cover; /* Gerekirse değiştirin: fill veya contain */
+            border-radius: 10px; /* Çerçeveye yuvarlaklık uygular */
+            display: block; /* Görüntü kenar boşluklarını sıfırlar */
+        }
 
         .recipe-image {
             flex: 1;
@@ -45,11 +52,7 @@
             border: 2px solid #d1b09b;
         }
 
-        .recipe-image img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
+        
 
         .recipe-details {
             flex: 2;
@@ -116,7 +119,7 @@
 
             <div class="recipe-info">
                 <div class="recipe-image">
-                    <img src="" alt="Tarif Resmi" />
+                   <img id="recipeImage" runat="server" alt="Tarif Resmi" />
                 </div>
                 <div class="recipe-details">
                     <h3>Malzemeler:</h3>
