@@ -8,8 +8,5 @@ Bu projenin nasılçalıştığı hakkında bilgilendirme için aşağıya bir p
 
 Aşağıda projeyi anlatan video bulunmaktadır:
 
-<video width="600" controls>
-  <source src="yemek_tarifleri_web_sites.mp4" type="video/mp4">
-  Tarayıcınız bu videoyu desteklemiyor. Videoyu [buradan indirin](yemek_tarifleri_web_sites.mp4).
-</video>
+[Projeyi Anlatan Videoyu İzlemek İçin Tıklayın](https://drive.google.com/file/d/1USQ6CaGTfqDLpZM5GYDwwBqjZOMFeO9K/view?usp=drive_link)
 
