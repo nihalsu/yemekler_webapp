@@ -4,7 +4,12 @@ Bu projenin nasılçalıştığı hakkında bilgilendirme için aşağıya bir p
 
 [PDF Dosyasını İndir](BLM4531_1.pdf)
 
+## Proje Videosu
+
+Aşağıda projeyi anlatan video bulunmaktadır:
+
 <video width="600" controls>
-  <source src="yemek_tarifleri_web_sitesş.mp4" type="video/mp4">
-  Tarayıcınız bu videoyu desteklemiyor. Videoyu [buradan indirin](yemek_tarifleri_web_sitesş.mp4).
+  <source src="yemek_tarifleri_web_sites.mp4" type="video/mp4">
+  Tarayıcınız bu videoyu desteklemiyor. Videoyu [buradan indirin](yemek_tarifleri_web_sites.mp4).
 </video>
+
